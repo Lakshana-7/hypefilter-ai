@@ -1,48 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <style>
-    body {
-      width: 240px;
-      font-family: system-ui, -apple-system, sans-serif;
-      padding: 16px;
-      margin: 0;
-      background-color: #0f172a;
-      color: #f8fafc;
-      text-align: center;
-    }
-    h2 {
-      margin: 0 0 4px 0;
-      font-size: 18px;
-      color: #38bdf8;
-    }
-    p {
-      font-size: 12px;
-      color: #94a3b8;
-      margin: 0 0 16px 0;
-    }
-    .btn {
-      width: 100%;
-      background-color: #0284c7;
-      color: #ffffff;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn:hover {
-      background-color: #0369a1;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>HypeFilter.ai Dashboard</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h2>HyperFilter.ai</h2>
-  <p>Cut through the noise. See what's real.</p>
-  <button id="scan-btn" class="btn">Scan Page</button>
+  <div class="container">
+    <div class="header">
+      <h1 class="logo">HypeFilter<span>.ai</span></h1>
+      <p class="subtitle">Cognitive Bias & Jargon Shield</p>
+    </div>
 
+    <div class="form-group">
+      <label for="platform-select">Target Context Profile</label>
+      <select id="platform-select">
+        <option value="news">Generic News / Articles</option>
+        <option value="linkedin">LinkedIn Corporate Hype</option>
+        <option value="crypto">Web3 / Crypto FOMO</option>
+        <option value="marketing">Sales Copy / Landing Pages</option>
+        <option value="academic">Academic / Research Mode</option>
+        <option value="editor">Editor Mode (Plain English)</option>
+      </select>
+    </div>
+
+    <div class="options-panel">
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span class="toggle-title">Bias Heatmap</span>
+          <span class="toggle-desc">Color paragraphs by bias density</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="heatmap-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <span class="toggle-title">Roast Mode</span>
+          <span class="toggle-desc">Show sarcastic AI takedown</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="roast-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button id="scan-btn" class="primary-btn">Scan Active Webpage</button>
+
+    <div id="status-display" class="status-box hidden">
+      <div class="spinner"></div>
+      <span id="status-text">Analyzing page content...</span>
+    </div>
+
+    <div id="results-card" class="results-area hidden">
+      <div class="metric-row">
+        <span class="label">Substance Score:</span>
+        <span id="score-value" class="score">--</span>
+      </div>
+      <div class="metric-row" style="margin-bottom: 6px; border-bottom: none; padding-bottom: 0;">
+        <span class="label">"Could Have Been Shorter" Meter:</span>
+        <span id="shorter-value" class="shorter-score">--</span>
+      </div>
+      <div class="progress-bar-container">
+        <div id="shorter-bar" class="progress-bar"></div>
+      </div>
+      <div id="summary-container" class="summary-box">
+        <strong>Verdict Summary:</strong>
+        <p id="summary-text">...</p>
+      </div>
+      <div id="roast-container" class="roast-box hidden">
+        <strong>Sarcastic Roast:</strong>
+        <p id="roast-text">...</p>
+      </div>
+
+      <div class="breakdown-title">Issue Analysis</div>
+      <div class="breakdown-grid" id="breakdown-grid">
+        <div class="breakdown-tag">Jargon <span class="count" id="count-jargon">0</span></div>
+        <div class="breakdown-tag">Fallacies <span class="count" id="count-fallacy">0</span></div>
+        <div class="breakdown-tag">Biases <span class="count" id="count-bias">0</span></div>
+        <div class="breakdown-tag">Manipulation <span class="count" id="count-manipulation">0</span></div>
+        <div class="breakdown-tag">Unverified <span class="count" id="count-claim">0</span></div>
+      </div>
+    </div>
+
+    <button id="view-history-btn" class="secondary-btn">📊 View History Dashboard</button>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

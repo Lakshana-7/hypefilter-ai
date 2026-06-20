@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HypeFilter.ai - Analytics & Scan History</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar / Brand -->
+    <header class="navbar">
+      <div class="brand">
+        <h1 class="logo">HypeFilter<span>.ai</span></h1>
+        <span class="badge">Analytics Dashboard</span>
+      </div>
+      <div class="actions">
+        <button id="export-btn" class="btn secondary">📥 Export History (JSON)</button>
+        <button id="clear-btn" class="btn danger">🗑️ Clear All History</button>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Row 1: Metrics Overview -->
+      <section class="metrics-row">
+        <div class="card metric-card">
+          <span class="metric-label">Total Scans</span>
+          <span id="metric-total-scans" class="metric-value">0</span>
+          <span class="metric-trend">Lifetime activity</span>
+        </div>
+        <div class="card metric-card">
+          <span class="metric-label">Average Substance Score</span>
+          <span id="metric-avg-score" class="metric-value">--</span>
+          <span id="metric-avg-label" class="metric-trend">--</span>
+        </div>
+        <div class="card metric-card">
+          <span class="metric-label">Most Scanned Hostname</span>
+          <span id="metric-top-domain" class="metric-value domain-text">N/A</span>
+          <span id="metric-domain-scans" class="metric-trend">0 total scans</span>
+        </div>
+        <div class="card metric-card">
+          <span class="metric-label">Total Flagged Issues</span>
+          <span id="metric-total-issues" class="metric-value">0</span>
+          <span class="metric-trend">Buzzwords & Fallacies</span>
+        </div>
+      </section>
+
+      <!-- Row 2: Charts & Leaderboards -->
+      <div class="charts-row">
+        <!-- Canvas Chart Card -->
+        <section class="card chart-card">
+          <div class="card-header">
+            <h3>Substance Score Trend</h3>
+            <span class="card-subtitle">Last 15 scans over time</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="trend-chart" width="600" height="250"></canvas>
+          </div>
+        </section>
+
+        <!-- Most Biased Sites Leaderboard -->
+        <section class="card leaderboard-card">
+          <div class="card-header">
+            <h3>Most Biased Domains</h3>
+            <span class="card-subtitle">Hostnames with lowest average substance scores</span>
+          </div>
+          <ul id="leaderboard-list" class="leaderboard-list">
+            <!-- Populated dynamically -->
+            <li class="empty-state">No scan history recorded.</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Row 3: History List Table -->
+      <section class="card table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <h3>Scan History Records</h3>
+            <span class="card-subtitle">Detailed archive of all scanned pages</span>
+          </div>
+          <div class="table-actions">
+            <input type="text" id="search-input" placeholder="🔍 Search by domain, title or platform..." class="search-box">
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Scanned Date</th>
+                <th>Target Webpage Info</th>
+                <th>Platform</th>
+                <th>Substance Score</th>
+                <th>Issues</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody">
+              <!-- Dynamically populated -->
+              <tr>
+                <td colspan="6" class="empty-state">No scan records found. Scan a page using the HypeFilter extension to begin!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container hidden" id="pagination-controls">
+          <button id="prev-page" class="btn pag-btn">◀ Previous</button>
+          <span id="page-indicator">Page 1 of 1</span>
+          <button id="next-page" class="btn pag-btn">Next ▶</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Overlay Details Modal -->
+    <div id="details-modal" class="modal-overlay hidden">
+      <div class="modal-content card">
+        <button class="close-modal-btn" id="close-modal">✕</button>
+        <div class="modal-header">
+          <h2 id="modal-title">Webpage Title Here</h2>
+          <p id="modal-meta" class="modal-meta">Details on: <span id="modal-domain">domain.com</span> | Scanned on: <span id="modal-date">Date</span></p>
+        </div>
+
+        <div class="modal-grid">
+          <!-- Left Column: Summary & Roast -->
+          <div class="modal-left">
+            <div class="modal-section-card score-panel">
+              <span class="modal-section-title">Substance Rating</span>
+              <div class="rating-display">
+                <span id="modal-score" class="score-number">--</span>
+                <div class="rating-details">
+                  <span id="modal-score-verdict" class="verdict-tag">High Jargon</span>
+                  <span class="rating-text">The higher the score, the cleaner the content is.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-section-card">
+              <span class="modal-section-title">Verdict Summary</span>
+              <p id="modal-summary" class="summary-body">...</p>
+            </div>
+
+            <div class="modal-section-card roast">
+              <span class="modal-section-title">Sarcastic AI Roast</span>
+              <p id="modal-roast" class="roast-body">...</p>
+            </div>
+          </div>
+
+          <!-- Right Column: Offending Phrases list -->
+          <div class="modal-right">
+            <div class="modal-section-card phrase-list-card">
+              <span class="modal-section-title">Flagged Incidents</span>
+              <ul id="modal-phrases-list" class="phrase-list">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

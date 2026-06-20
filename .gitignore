@@ -1,0 +1,6 @@
+# Ignore local environment secrets
+backend/.env
+
+# Ignore heavy dependency folders
+backend/node_modules/
+node_modules/

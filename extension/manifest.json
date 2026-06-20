@@ -1,20 +1,34 @@
 {
   "manifest_version": 3,
-  "name": "HyperFilter.ai",
+  "name": "HypeFilter.ai",
   "version": "1.0.0",
   "description": "An AI-powered browser extension built to cut the crap out of your feed.",
   "permissions": [
     "activeTab",
-    "storage",
-    "scripting"
+    "scripting",
+    "storage"
   ],
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/service-worker.js"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content/content.js"]
+      "js": ["content/content.js"],
+      "css": ["content/tooltip.css"]
     }
   ]
 }
