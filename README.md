@@ -198,7 +198,7 @@ MIT — do whatever you want with it, just don't use it to write hype.
 ## 👤 Author
 
 Built solo by **Lakshana**
-- LinkedIn: [your-linkedin-url]
+- LinkedIn: www.linkedin.com/in/lakshana-a-135494385
 - GitHub: https://github.com/Lakshana-7
 
 ---
