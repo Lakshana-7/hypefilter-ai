@@ -8,6 +8,10 @@
 ![Gemini AI](https://img.shields.io/badge/AI-Gemini-8E75B2?logo=google)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
 
+![Popup](assets/popup.png)
+![Scan Result](assets/scan-result.png)
+![Roast Mode](assets/roast-mode.png)
+![Dashboard](assets/dashboard.png)
 ---
 
 ## 🚨 What It Catches
