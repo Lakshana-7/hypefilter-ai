@@ -15,7 +15,7 @@ console.log("-----------------------------------------");
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY?.trim(),
 });
 
 export async function queryLLM(prompt) {
