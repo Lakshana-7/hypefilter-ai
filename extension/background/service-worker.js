@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("🔌 Relaying text payload to local Node.js microservice...");
 
     // Send the extraction data directly to your local Express endpoint
-    fetch("http://localhost:3000/analyze", {
+      fetch("https://hypefilter-ai-production.up.railway.app/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
