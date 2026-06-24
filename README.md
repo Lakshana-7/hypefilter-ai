@@ -6,7 +6,6 @@
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-green)
 ![Built with Node.js](https://img.shields.io/badge/Backend-Node.js-339933?logo=nodedotjs)
 ![Gemini AI](https://img.shields.io/badge/AI-Gemini-8E75B2?logo=google)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
 
 ![Banner](assets/banner.png)
 ![Popup](assets/popup.png)
